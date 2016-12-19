@@ -36,7 +36,7 @@ More detailled description of the structure:
   * 3c. Number of columns (2 bytes): Number of columns in the table.
   * 3d1. Byte Count column name (2 bytes): Amount of bytes of the column name.
   * 3d2. Column name: The column name.
-  * 3d3. Row Cont: The amount of rows in the table.
+  * 3d3. Row Count (4 bytes): The amount of rows in the table.
   * 3d4. Byte Count static payload (4 bytes): when all entries in the column are of the same length, this field contains the number of bytes of the single payload. If the entries differ in size, all 4 bytes of this entry are 0.
   * 3d5. [Byte Count dynamic payload (4 bytes): Only if the 3d3 field is zero ("0000"), the dynamic payload field is used. Contains the number of bytes of the column data.]
   * 3d6. Payload: The column data.
