@@ -1,5 +1,7 @@
 # compresSQLite
-Converts from SQLite databases into a special binary file and vice versa, in order to improve the compression ratio of subsequent compression for data exchange.
+compresSQLite is a tool to compress a SQLite database for data exchange, thus reducing the data and time consumption of the file transmission.
+
+This tool converts a SQLite databases into a special binary file and vice versa, in order to improve the compression ratio of subsequent compression. The compression improvement is achieved by converting the row-oriented SQLite database to a file with column-oriented layout. Laying out similar data (everything in a database column has a high likelyhood to represent similar data) in a consequitive space on the harddisk. As a result, subsequent compression can do a better job.
 
 The content of the binary file is described as follows:
 
