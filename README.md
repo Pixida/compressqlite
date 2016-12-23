@@ -13,13 +13,13 @@ Database description:
 
 Table description:
 
-|     | 3a        | 3b        | 3c        | 3d1        | 3d2        | 3d3        |     |
-| --- | --------- |---------- | --------- | ---------- | ---------- | ---------- | --- |
-| ... | BC create stmt | Create stmt | Number of cols | BC col name | Col name | Row Count | ... |
+|     | 3a        | 3b        | 3c        | 3d1        | 3d2        |     |
+| --- | --------- |---------- | --------- | ---------- | ---------- | --- |
+| ... | BC create stmt | Create stmt | Number of cols | Col name | Row Count | ... |
 
 Table data description:
 
-|     | 3d4        | [3d5]        | 3d6        |     |
+|     | 3d3        | [3d4]        | 3d5        |     |
 | --- | ---------- |------------- | ---------- | --- |
 | ... | BC static payload | [BC dynamic payload] | Payload | ... |
 
@@ -36,12 +36,11 @@ More detailled description of the structure:
   * 3a. Byte Count create statement (2 bytes): Amount of bytes of the table creation statement.
   * 3b. Create statement: The table creation statement with column names and types. Also holds information about the primary keys, indices, unique constraints, and other table features like FTS or Spellfix1.
   * 3c. Number of columns (2 bytes): Number of columns in the table.
-  * 3d1. Byte Count column name (2 bytes): Amount of bytes of the column name.
-  * 3d2. Column name: The column name.
-  * 3d3. Row Count (4 bytes): The amount of rows in the table.
-  * 3d4. Byte Count static payload (4 bytes): when all entries in the column are of the same length, this field contains the number of bytes of the single payload. If the entries differ in size, all 4 bytes of this entry are 0.
-  * 3d5. [Byte Count dynamic payload (4 bytes): Only if the 3d3 field is zero ("0000"), the dynamic payload field is used. Contains the number of bytes of the column data.]
-  * 3d6. Payload: The column data.
+  * 3d1. Col name (2 bytes): Name of the column
+  * 3d2. Row Count (4 bytes): The amount of rows in the table.
+  * 3d3. Byte Count static payload (4 bytes): when all entries in the column are of the same length, this field contains the number of bytes of the single payload. If the entries differ in size, all 4 bytes of this entry are 0.
+  * 3d4. [Byte Count dynamic payload (4 bytes): Only if the 3d3 field is zero ("0000"), the dynamic payload field is used. Contains the number of bytes of the column data.]
+  * 3d5. Payload: The column data.
 
 
 All defined limits are derived from the SQLite implementation limitations (https://www.sqlite.org/limits.html) and therefore do not add further limitations to the processed database.
