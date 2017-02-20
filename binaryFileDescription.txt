@@ -1,36 +1,3 @@
 The content of the binary file is described as follows:
 
-Database description:
-#############################################
-# 1: Byte Count header (BC) # 2: Header # ...
-#############################################
-
-Table description:
-########################################################################################################
-... # 3a: BC create stmt # 3b: Create stmt # 3c: Number of cols # 3d1: BC col name # 3d2: Col name # ...
-########################################################################################################
-
-Table data description:
-##############################################################################
-... # 3d3: BC static payload # [3d5: BC dynamic payload] # 3d6: Payload # ...#
-##############################################################################
-
-For each table in the database, point 3_ is written to the binary file in a loop. Additionaly, for each column of each table, point 3d_ is also written to the binary file in a loop.
-
-More detailled description of the structure:
-1.	 Byte Count Header (2 bytes): Amount of bytes of the file header. 	
-2.	 Header:
-		* compresSQLite MagicNumber (TBD)
-		* SQLite version of the original database
-		* File checksum
-3a.	 Byte Count create statement (2 bytes): Amount of bytes of the table creation statement.
-3b.	 Create statement: The table creation statement with column names and types. Also holds information about the primary keys, indices, unique constraints, and other table features like FTS or Spellfix1.
-3c.	 Number of columns (2 bytes): Number of columns in the table.
-3d1.	 Byte Count column name (2 bytes): Amount of bytes of the column name.
-3d2.	 Column name: The column name.
-3d3.	 Byte Count static payload (4 bytes): when all entries in the column are of the same length, this field contains the number of bytes of the single payload. If the entries differ in size, all 4 bytes of this entry are 0.
-[3d4.	 Byte Count dynamic payload (4 bytes): Only if the 3d3 field is zero ("0000"), the dynamic payload field is used. Contains the number of bytes of the column data.]
-3d5.	 Payload: The column data.
-
-
-All defined limits are derived from the SQLite implementation limitations (https://www.sqlite.org/limits.html) and therefore do not add further limitations to the processed database.
+See README.md
